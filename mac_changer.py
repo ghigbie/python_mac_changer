@@ -32,3 +32,7 @@ options = get_arguments()
 ifconfig_result = subprocess.check_output(["ifconfig", options.interface])
 print("IFCONFIG RESULT: ")
 print(ifconfig_result)
+
+mac_address_search_result = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result)
+print("")
+print("MAC ADDRESS SEARCH RESULT: ", mac_address_search_result)
