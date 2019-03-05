@@ -38,3 +38,13 @@ if mac_address_search_result:
     print("MAC ADDRESS SEARCH RESULT: ", mac_address_search_result.group(0))
 else:
     print("[-] Could not find MAC address : (")
+
+
+def mac_match(retreived_mac, new_mac_address):
+    if retreived_mac == new_mac_address:
+        print('Success! The MAC address has been changed!')
+    else:
+        print('The MAC address could not be changed : (')
+
+
+mac_match(mac_address_search_result, options.new_mac)
