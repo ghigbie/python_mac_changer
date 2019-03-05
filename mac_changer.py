@@ -26,25 +26,24 @@ def mac_changer(interface, change_to):
     subprocess.call("ifconfig", shell=True)
 
 
+def get_current_mac(interface):
+    ifconfig_result = str(subprocess.check_output(["ifconfig", interface]))
+    mac_address_search_result = re.search(r'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
+    if mac_address_search_result:
+        return mac_address_search_result.group(0)
+    else:
+        print("[-] Could not find MAC address : (")
+
+
 options = get_arguments()
+current_mac = get_current_mac(options.interface)
+print("Current MAC: ", current_mac)
 # mac_changer(options.interface, options.new_mac)
 
-ifconfig_result = str(subprocess.check_output(["ifconfig", options.interface]))
-print("IFCONFIG RESULT: ")
-print(type(ifconfig_result))
-
-mac_address_search_result = re.search(r'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
-if mac_address_search_result:
-    print("MAC ADDRESS SEARCH RESULT: ", mac_address_search_result.group(0))
-else:
-    print("[-] Could not find MAC address : (")
 
 
-def mac_match(retreived_mac, new_mac_address):
-    if retreived_mac == new_mac_address:
+def mac_match(retrieved_mac, new_mac_address):
+    if retrieved_mac == new_mac_address:
         print('Success! The MAC address has been changed!')
     else:
         print('The MAC address could not be changed : (')
-
-
-mac_match(mac_address_search_result, options.new_mac)
