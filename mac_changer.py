@@ -29,10 +29,12 @@ def mac_changer(interface, change_to):
 options = get_arguments()
 # mac_changer(options.interface, options.new_mac)
 
-ifconfig_result = subprocess.check_output(["ifconfig", options.interface])
+ifconfig_result = str(subprocess.check_output(["ifconfig", options.interface]))
 print("IFCONFIG RESULT: ")
-print(ifconfig_result)
+print(type(ifconfig_result))
 
-mac_address_search_result = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result)
-print("")
-print("MAC ADDRESS SEARCH RESULT: ", mac_address_search_result)
+mac_address_search_result = re.search(r'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
+if mac_address_search_result:
+    print("MAC ADDRESS SEARCH RESULT: ", mac_address_search_result.group(0))
+else:
+    print("[-] Could not find MAC address : (")
