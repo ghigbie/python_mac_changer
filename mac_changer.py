@@ -37,13 +37,11 @@ def get_current_mac(interface):
 
 options = get_arguments()
 current_mac = get_current_mac(options.interface)
-print("Current MAC: ", current_mac)
+print("Current MAC: ", str(current_mac))
 # mac_changer(options.interface, options.new_mac)
 
 
-
-def mac_match(retrieved_mac, new_mac_address):
-    if retrieved_mac == new_mac_address:
-        print('Success! The MAC address has been changed!')
-    else:
-        print('The MAC address could not be changed : (')
+if current_mac == options.new_mac:
+    print('[+] Success! The MAC address has been changed!')
+else:
+    print('[-] The MAC address could not be changed : (')
