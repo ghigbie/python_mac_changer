@@ -40,6 +40,8 @@ current_mac = get_current_mac(options.interface)
 print("Current MAC: ", str(current_mac))
 # mac_changer(options.interface, options.new_mac)
 
+print("current mac: ", current_mac)
+print("new mac: ", options.new_mac)
 
 if current_mac == options.new_mac:
     print('[+] Success! The MAC address has been changed!')
